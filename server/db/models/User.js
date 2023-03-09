@@ -21,7 +21,8 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isAlpha: true,
+      //TODO: validate for alpha characters and also include ' for names such as O'Riley
+      // isAlpha: true,
       len: [1, 50],
     },
   },
