@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "start": "webpack-dev-server .",
-    "start:dev": "npm run build & npm run start",
+  "scripts":
+  {
+    "start": "npm run start-server & npm run start-react",
+    "start-react": "react-scripts start",
     "start-server": "node server/index.js",
     "build": "Webpack .",
-    "test": "test",
+    "kill-port" : "npx kill-port 3030",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
     "seed": "node seed.js"
   },
   "repository": {

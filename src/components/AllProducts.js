@@ -9,8 +9,6 @@ const AllProducts = () => {
   const allProducts = useSelector((state) => state.products.allProducts)
   const status = useSelector((state) => state.products.status)
 
-  console.log(allProducts)
-
   useEffect(() => {
     if (status !== 'succeeded') {
       dispatch(getAllProducts())
