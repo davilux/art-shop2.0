@@ -44,6 +44,10 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  refreshToken : {
+    type: Sequelize.STRING,
+    defaultValue : ""
+  }
 })
 
 module.exports = User

@@ -1,5 +1,3 @@
-const {RefreshToken} = require('../db/index').models
-
 /* This document contains functions and middleware for JWT. */
 
 const jwt = require('jsonwebtoken')

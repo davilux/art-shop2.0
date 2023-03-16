@@ -2,6 +2,8 @@ const router = require('express').Router()
 const {generateAccessToken, generateRefreshToken, refreshActionToken} = require('./jwt')
 let {refreshTokens} = require('./jwt')
 
+const {User} = require('../db/index').models
+
 //REFRESH TOKENS
 
 router.post('/token', async (req, res, next) => {
@@ -17,18 +19,36 @@ router.post('/token', async (req, res, next) => {
 
 //LOGIN
 
-router.post('/login', (req, res) => {
-  // TODO: authenticate user. Watch WebDevSimplified video for this
+router.post('/login', async (req, res) => {
+  try{
+      // TODO: authenticate user. Watch WebDevSimplified video for this
 
-  const username = req.body.username
-  const user = {name : username}
-  const accessToken = generateAccessToken(user)
-  const refreshToken = generateRefreshToken(user)
-  refreshTokens.push(refreshToken)
-  res.json({
-      accessToken,
-      refreshToken
-  })
+      const username = req.body.username
+      const accessToken = generateAccessToken({name : req.body.username})
+      const refreshToken = generateRefreshToken({name : req.body.username})
+
+      //TODO remove this line. Use DB instead
+      refreshTokens.push(refreshToken)
+
+      const userInstance = await User.findOne({
+        where: {
+          'username' : req.body.username
+        }
+      })
+
+      const refreshTokenInDb = await userInstance.update({
+        "refreshToken": refreshToken
+      })
+
+      res.json({
+          accessToken,
+          refreshToken : refreshTokenInDb.refreshToken
+      })
+  }
+  catch(e){
+    console.error(e)
+  }
+
 })
 
 //LOG OUT

@@ -6,7 +6,6 @@ const Category = require('./models/Category')
 const Order = require('./models/Order')
 const LineItem = require('./models/LineItem')
 const Review = require('./models/Review')
-const RefreshToken = require('./models/RefreshToken')
 
 //Associations:
 Product.belongsToMany(Category, {through: 'Product_Category'})
@@ -38,7 +37,6 @@ module.exports = {
     Product,
     Category,
     Order,
-    LineItem,
-    RefreshToken
+    LineItem
   },
 }
