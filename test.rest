@@ -1,24 +1,29 @@
 
 # This file was created to test jwt authentication using the REST Client plugin for VSCode. After sending the POST request to login, copy the tokens into the other requests.
 
+
+# Generate access and refresh tokens on login
 POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {"username": "Davi"}
 ###
 
+# Expire tokens on log out
 DELETE http://localhost:3000/api/auth/logout
 Content-Type: application/json
 
 {"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aSIsImlhdCI6MTY3ODkxOTQ3MH0.67RO2KhMMWPDOlzqSsgUiDkcyzdYKh4U_no-bHwe6I4"}
 ###
 
+# Generate a new acces token from a refresh token.
 POST http://localhost:3000/api/auth/token
 Content-Type: application/json
 
-{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aSIsImlhdCI6MTY3ODkxOTgwMn0.Gd17_7Xc2Bhlrh8bLadkXHZM9TfU6XKIc8iTPdlLteM"}
+{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aSIsImlhdCI6MTY3ODk5NDg0NX0.WeNOy8uIG-IXoq6Z1COh5NC1EcQgwFIVmC6xGgltWEA"}
 ###
 
+# Visit a protected route using an access token
 GET http://localhost:3000/api/users/1/settings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aSIsImlhdCI6MTY3ODkxNzgzNiwiZXhwIjoxNjc4OTE3ODY2fQ.OLw41t40vFsZ57OQwcnogamoifzsA2ifOUoOJWEIxHI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aSIsImlhdCI6MTY3ODk5NDkwMSwiZXhwIjoxNjc4OTk1NTAxfQ.d_n2mc5nhxGp1LeR7dczk7lydRZA_rlMNWcAgOTLfRM
 ###

@@ -6,6 +6,7 @@ const Category = require('./models/Category')
 const Order = require('./models/Order')
 const LineItem = require('./models/LineItem')
 const Review = require('./models/Review')
+const RefreshToken = require('./models/RefreshToken')
 
 //Associations:
 Product.belongsToMany(Category, {through: 'Product_Category'})
@@ -28,6 +29,8 @@ Review.belongsTo(User)
 Product.hasMany(Review)
 Review.belongsTo(Product)
 
+//TODO: Create association for RefreshToken
+
 module.exports = {
   db,
   models: {
@@ -35,6 +38,7 @@ module.exports = {
     Product,
     Category,
     Order,
-    LineItem
+    LineItem,
+    RefreshToken
   },
 }
