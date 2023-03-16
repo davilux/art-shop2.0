@@ -1,10 +1,6 @@
 /* This document contains functions and middleware for JWT. */
-
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
-
-//TODO: Move saved refresh tokens to the database
-let refreshTokens = []
 
 /**
  *  Generates an access token.
@@ -63,7 +59,6 @@ function authenticateToken(req,res,next){
 }
 
 module.exports = {
-  refreshTokens,
   authenticateToken,
   generateAccessToken,
   generateRefreshToken,

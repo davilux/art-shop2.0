@@ -13,17 +13,24 @@ Content-Type: application/json
 DELETE http://localhost:3000/api/auth/logout
 Content-Type: application/json
 
-{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aSIsImlhdCI6MTY3ODkxOTQ3MH0.67RO2KhMMWPDOlzqSsgUiDkcyzdYKh4U_no-bHwe6I4"}
+{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2NzkwMDAzNDJ9.LfQ-vB4LsJgiANvxc5zz8pybkaSLqH1hZxcgAqTFQWQ"}
 ###
 
 # Generate a new acces token from a refresh token.
 POST http://localhost:3000/api/auth/token
 Content-Type: application/json
 
-{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aSIsImlhdCI6MTY3ODk5NTM4N30.PEtLLnt22qbQJ907Ggo8tRgpyaDtfJGKGk1QWOFnM4Y"}
+{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2Nzg5OTk2MTJ9.1y8cLvctrGM_nakS3hoDA3dUe52LVyH4udWaktQ4pgc"}
 ###
 
 # Visit a protected route using an access token
 GET http://localhost:3000/api/users/1/settings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF2aSIsImlhdCI6MTY3ODk5NDkwMSwiZXhwIjoxNjc4OTk1NTAxfQ.d_n2mc5nhxGp1LeR7dczk7lydRZA_rlMNWcAgOTLfRM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2NzkwMDA0MjIsImV4cCI6MTY3OTAwMTAyMn0.q35FXWK3ofwwxuX-qw8T5AUC0qaTUcR2PHDrhnIqcMU
 ###
+
+
+
+# {
+#   "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2NzkwMDA0MjIsImV4cCI6MTY3OTAwMTAyMn0.q35FXWK3ofwwxuX-qw8T5AUC0qaTUcR2PHDrhnIqcMU",
+#   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2NzkwMDA0MjJ9.nEUsjYtTCrjpcTxnRqJNcNgUkp3HJQ6kYhw4K50-lpY"
+# }
