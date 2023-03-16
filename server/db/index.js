@@ -28,8 +28,6 @@ Review.belongsTo(User)
 Product.hasMany(Review)
 Review.belongsTo(Product)
 
-//TODO: Create association for RefreshToken
-
 module.exports = {
   db,
   models: {
