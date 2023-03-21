@@ -37,9 +37,6 @@ function refreshActionToken(refreshToken){
 
 /**
  * Middleware used to authenticate a token.
- * @param {*} req
- * @param {*} res
- * @param {*} next
  * @returns Status code relevant to the success or failure of the verification.
  */
 function authenticateToken(req,res,next){
@@ -58,9 +55,21 @@ function authenticateToken(req,res,next){
   })
 }
 
+/**
+ * Gatekeeing middleware that checks if the user provided in the request is an admin.
+ */
+const isAdmin = (req, res, next) => {
+  if (!req.user.isAdmin) {
+    res.status(403).send('User is not an administrator.')
+  } else {
+    next()
+  }
+}
+
 module.exports = {
   authenticateToken,
   generateAccessToken,
   generateRefreshToken,
-  refreshActionToken
+  refreshActionToken,
+  isAdmin
 }

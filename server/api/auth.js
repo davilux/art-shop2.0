@@ -3,7 +3,7 @@ const {generateAccessToken, generateRefreshToken, refreshActionToken} = require(
 const {User} = require('../db/index').models
 
 //REFRESH ACCESS TOKEN
-router.post('/token', async (req, res, next) => {
+router.post('/refreshAccessToken', async (req, res, next) => {
   try{
       if(req.body.token === null || req.body.token === undefined) return res.sendStatus(401)
 
@@ -26,7 +26,6 @@ router.post('/token', async (req, res, next) => {
 })
 
 //LOGIN
-
 router.post('/login', async (req, res) => {
   try{
       // TODO: authenticate user. Watch WebDevSimplified video for this
@@ -58,7 +57,6 @@ router.post('/login', async (req, res) => {
 
 //LOG OUT
 //DELETE ACCESS TOKENS
-
 router.delete('/logout', async(req,res) => {
   try{
       //Find the user with the given refresh token.
