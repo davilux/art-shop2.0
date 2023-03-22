@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
-
-//TODO: move request to redux
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../redux/reducers/authSlice'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
 
   const handleSubmit = async (e) =>  {
     e.preventDefault()
@@ -14,18 +14,9 @@ const Login = () => {
     if(!username) return alert('Username required.')
     if(!password) return alert('Please enter a password.')
 
-        //TODO: Move this to a redux thunk
-    const loginResponse = await axios.post('/api/auth/login', {
-      username,
-      password
-    }).catch(error => {
-      console.error(error);
-    })
+    dispatch(loginUser({username, password}))
 
-    if(loginResponse && loginResponse.status === 200) {
-      window.localStorage.setItem('accessToken', loginResponse.data.accessToken)
-      window.localStorage.setItem('refreshToken', loginResponse.data.refreshToken)
-    }
+    //TODO: Navigate to different page once user logs in
   }
 
   return (

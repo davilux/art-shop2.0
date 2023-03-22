@@ -2,11 +2,21 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 //THUNKS
-export const authorizeUser = createAsyncThunk('auth', async () => {
+export const loginUser = createAsyncThunk('loginUser', async ({username, password}) => {
   try{
-    //TODO: check if credentials are valid
+    const loginResponse = await axios.post('/api/auth/login', {
+      username,
+      password
+    })
+
+    //TODO: Move tokens to cookies
+    if(loginResponse && loginResponse.status === 200) {
+      window.localStorage.setItem('accessToken', loginResponse.data.accessToken)
+      window.localStorage.setItem('refreshToken', loginResponse.data.refreshToken)
+    }
   }
   catch(e){
+    console.error(e)
     return e.message
   }
 })
@@ -15,17 +25,23 @@ export const authorizeUser = createAsyncThunk('auth', async () => {
 export const authSlice = createSlice({
   name : "state",
   initialState : {
-    token: {},
     status: 'idle',
     error : null
   },
   reducers : {},
   extraReducers(builder){
     builder
-      .addCase(auth.pending, (state) => {
+      .addCase(loginUser.pending, (state) => {
         state.status = 'loading'
+      })
+      .addCase(loginUser.fulfilled, (state) => {
+        state.status = 'succeeded'
+      })
+      .addCase(loginUser.pending, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
       })
   }
 })
 
-export default usersSlice.reducer
+export default authSlice.reducer
