@@ -14,6 +14,7 @@ export const loginUser = createAsyncThunk('loginUser', async ({username, passwor
       window.localStorage.setItem('accessToken', loginResponse.data.accessToken)
       window.localStorage.setItem('refreshToken', loginResponse.data.refreshToken)
     }
+    return loginResponse.data.user
   }
   catch(e){
     console.error(e)
@@ -25,6 +26,7 @@ export const loginUser = createAsyncThunk('loginUser', async ({username, passwor
 export const authSlice = createSlice({
   name : "state",
   initialState : {
+    loggedInUser : {},
     status: 'idle',
     error : null
   },
@@ -34,10 +36,11 @@ export const authSlice = createSlice({
       .addCase(loginUser.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(loginUser.fulfilled, (state) => {
+      .addCase(loginUser.fulfilled, (state, action) => {
         state.status = 'succeeded'
+        state.loggedInUser = action.payload
       })
-      .addCase(loginUser.pending, (state, action) => {
+      .addCase(loginUser.rejected, (state, action) => {
         state.status = 'failed'
         state.error = action.error.message
       })

@@ -58,7 +58,8 @@ router.post('/login', async (req, res, next) => {
       //TODO: Do I want both of these sent back?
       res.json({
           accessToken,
-          refreshToken : refreshTokenInDb.refreshToken
+          refreshToken : refreshTokenInDb.refreshToken,
+          user: userInstance
       })
   }
   catch(e){

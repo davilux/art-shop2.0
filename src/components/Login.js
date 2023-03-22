@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { loginUser } from '../redux/reducers/authSlice'
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) =>  {
     e.preventDefault()
@@ -17,6 +19,7 @@ const Login = () => {
     dispatch(loginUser({username, password}))
 
     //TODO: Navigate to different page once user logs in
+    //navigate('/shop')
   }
 
   return (
