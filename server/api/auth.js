@@ -1,9 +1,9 @@
 const router = require('express').Router()
-const {generateAccessToken, generateRefreshToken, refreshActionToken} = require('./jwt')
+const {generateAccessToken, generateRefreshToken, refreshAccessToken} = require('./jwt')
 const {User} = require('../db/index').models
 
 //REFRESH ACCESS TOKEN
-router.post('/token', async (req, res, next) => {
+router.post('/refreshAccessToken', async (req, res, next) => {
   try{
       if(req.body.token === null || req.body.token === undefined) return res.sendStatus(401)
 
@@ -17,7 +17,7 @@ router.post('/token', async (req, res, next) => {
       //check if refreshToken is still valid
       if(!refreshToken) return res.sendStatus(403)
 
-      const newAccessToken = refreshActionToken(refreshToken)
+      const newAccessToken = refreshAccessToken(refreshToken)
       return newAccessToken ? res.json(newAccessToken) : res.sendStatus(403)
   }
   catch(e){
@@ -25,11 +25,11 @@ router.post('/token', async (req, res, next) => {
   }
 })
 
-//LOGIN
-
+//LOGIN:
+// Authenticate user, then issue access token and refresh token.
 router.post('/login', async (req, res) => {
   try{
-      // TODO: authenticate user. Watch WebDevSimplified video for this
+      // TODO: authenticate user (check credentials). Watch WebDevSimplified video for this
 
       const username = req.body.username
       const accessToken = generateAccessToken({name : req.body.username})
@@ -57,8 +57,9 @@ router.post('/login', async (req, res) => {
 })
 
 //LOG OUT
-//DELETE ACCESS TOKENS
+//Delete refresh and access tokens
 
+//TODO: Manually expire the access token (instead of waiting for it to time out) so that after a user logs out, there isn't a window where an unregistered user can access the previously logged in user's private data
 router.delete('/logout', async(req,res) => {
   try{
       //Find the user with the given refresh token.
