@@ -1,6 +1,7 @@
 /* This document contains functions and middleware for JWT. */
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
+const bcrypt = require('bcrypt')
 
 /**
  *  Generates an access token.

@@ -28,10 +28,7 @@ const User = db.define('user', {
     },
   },
   password: {
-    type: Sequelize.STRING,
-    validate: {
-      len: [8, 24],
-    },
+    type: Sequelize.STRING
   },
   email: {
     type: Sequelize.STRING,
@@ -51,11 +48,16 @@ const User = db.define('user', {
   }
 })
 
-
 // HASHING HOOK
 const hashPassword = async (user) => {
-  user.password = await bcrypt.hash(user.password, SALT_ROUNDS)
+
+  //This check prevents an already hashed password from being re-hashed
+  if (user.changed('password')){
+    user.password = await bcrypt.hash(user.password, SALT_ROUNDS)
+  }
 }
+
+//TODO: Hook: beforeCreate to validate password length. Don't want to do this on sequelize model because passwords are hashed.
 
 User.beforeCreate(hashPassword)
 User.beforeUpdate(hashPassword)
