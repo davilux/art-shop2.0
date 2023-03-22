@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const {generateAccessToken, generateRefreshToken, refreshAccessToken} = require('./jwt')
 const {User} = require('../db/index').models
+const bcrypt = require('bcrypt')
 
 //REFRESH ACCESS TOKEN
 router.post('/refreshAccessToken', async (req, res, next) => {
@@ -27,31 +28,42 @@ router.post('/refreshAccessToken', async (req, res, next) => {
 
 //LOGIN:
 // Authenticate user, then issue access token and refresh token.
-router.post('/login', async (req, res) => {
+router.post('/login', async (req, res, next) => {
   try{
-      // TODO: authenticate user (check credentials). Watch WebDevSimplified video for this
-
-      const username = req.body.username
-      const accessToken = generateAccessToken({name : req.body.username})
-      const refreshToken = generateRefreshToken({name : req.body.username})
-
+      const {username, password} = req.body
       const userInstance = await User.findOne({
         where: {
-          'username' : req.body.username
+          'username' : username
         }
       })
+      if(!userInstance) {
+        res.status(400).send('Cannot find user.')
+        throw new Error()
+      }
+      const hashedPassword = userInstance.password
+      const passwordsMatch = await bcrypt.compare(req.body.password, hashedPassword)
+
+      if(!passwordsMatch) {
+        return res.status(401).send('Invalid password.')
+        throw new Error()
+      }
+
+      const accessToken = generateAccessToken({name : req.body.username})
+      const refreshToken = generateRefreshToken({name : req.body.username})
 
       const refreshTokenInDb = await userInstance.update({
         "refreshToken": refreshToken
       })
 
+      //TODO: Do I want both of these sent back?
       res.json({
           accessToken,
           refreshToken : refreshTokenInDb.refreshToken
       })
   }
   catch(e){
-    console.error(e)
+    //console.error(e)
+    next(e)
   }
 
 })

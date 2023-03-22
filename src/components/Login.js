@@ -10,15 +10,22 @@ const Login = () => {
   const handleSubmit = async (e) =>  {
     e.preventDefault()
 
-    console.log(username)
-    console.log(password)
+    //TODO: Improve UI for front-end validation
+    if(!username) return alert('Username required.')
+    if(!password) return alert('Please enter a password.')
 
-    const loginSuccess = await axios.post('/api/auth/login', {
+        //TODO: Move this to a redux thunk
+    const loginResponse = await axios.post('/api/auth/login', {
       username,
       password
+    }).catch(error => {
+      console.error(error);
     })
 
-    console.log('\n\n\nloginSuccess:',loginSuccess)
+    if(loginResponse && loginResponse.status === 200) {
+      window.localStorage.setItem('accessToken', loginResponse.data.accessToken)
+      window.localStorage.setItem('refreshToken', loginResponse.data.refreshToken)
+    }
   }
 
   return (
