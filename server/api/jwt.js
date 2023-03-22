@@ -27,7 +27,7 @@ function generateRefreshToken(user){
  * @param {String} refreshToken
  * @returns Access token, or undefined, in the event of a verification error.
  */
-function refreshActionToken(refreshToken){
+function refreshAccessToken(refreshToken){
   return jwt.verify(refreshToken, process.env.REFRESH_SECRET_KEY, (err, user) => {
     if(err) return undefined
     const accessToken = generateAccessToken({name : user.name})
@@ -70,6 +70,6 @@ module.exports = {
   authenticateToken,
   generateAccessToken,
   generateRefreshToken,
-  refreshActionToken,
+  refreshAccessToken,
   isAdmin
 }

@@ -1,14 +1,24 @@
 import React, {useState} from 'react'
 
+//TODO: move request to redux
+import axios from 'axios'
+
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = (e) =>  {
+  const handleSubmit = async (e) =>  {
     e.preventDefault()
 
     console.log(username)
     console.log(password)
+
+    const loginSuccess = await axios.post('/api/auth/login', {
+      username,
+      password
+    })
+
+    console.log('\n\n\nloginSuccess:',loginSuccess)
   }
 
   return (
