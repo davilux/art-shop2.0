@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../redux/reducers/authSlice'
+import { loginUser } from '../redux/reducers/usersSlice'
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -11,7 +11,6 @@ const Register = () => {
   const [email, setEmail] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const loggedInUser = useSelector((state) => state.auth.loggedInUser)
 
   const handleSubmit = async (e) =>  {
     e.preventDefault()

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../redux/reducers/authSlice'
+import { loginUser } from '../redux/reducers/usersSlice'
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -8,7 +8,9 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const loggedInUser = useSelector((state) => state.auth.loggedInUser)
+
+  //TODO: Check if user is already logged in as to conditionally render.
+  // const loggedInUser = useSelector((state) => state.users.loggedInUser)
 
   const handleSubmit = async (e) =>  {
     e.preventDefault()
