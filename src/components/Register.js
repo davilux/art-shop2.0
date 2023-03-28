@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../redux/reducers/authSlice'
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const loggedInUser = useSelector((state) => state.auth.loggedInUser)
@@ -17,17 +20,15 @@ const Login = () => {
     if(!username) return alert('Username required.')
     if(!password) return alert('Please enter a password.')
 
-    dispatch(loginUser({username, password}))
 
-    console.log('loggedInUser', loggedInUser)
-    //TODO: Navigate to different page once user logs in
-    //navigate('/shop')
+    //TODO: dispatch registerUser
+    //dispatch(loginUser({username, password}))
   }
 
   return (
     <>
       <h1>
-        Login
+        Register
       </h1>
       <form onSubmit={(e)=>handleSubmit(e)}>
         <label>
@@ -39,10 +40,22 @@ const Login = () => {
           Password:
           <input type="text" password="password" onChange={(event)=> setPassword(event.target.value)}/>
         </label>
+        <label>
+          First name:
+          <input type="text" name="first-name" onChange={(event)=> setFirstName(event.target.value)}/>
+        </label>
+        <label>
+          Last name:
+          <input type="text" name="last-name" onChange={(event)=> setLastName(event.target.value)}/>
+        </label>
+        <label>
+          Email:
+          <input type="text" name="email" onChange={(event)=> setEmail(event.target.value)}/>
+        </label>
         <input type="submit" value="Submit"/>
       </form>
     </>
   )
 }
 
-export default Login
+export default Register

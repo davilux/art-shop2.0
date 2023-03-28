@@ -7,6 +7,7 @@ import SingleProduct from './SingleProduct';
 import Cart from './Cart';
 import Login from './Login';
 import NotFound from './NotFound'
+import Register from './Register'
 
 const Navbar = () => {
   return (
@@ -22,6 +23,7 @@ const Navbar = () => {
         <Route path="/product" element={<SingleProduct/>} />
         <Route path="/cart" element={<Cart/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
         <Route path="/" element={<Home/>} />
         <Route path="*" element={<NotFound/>} />
       </Routes>

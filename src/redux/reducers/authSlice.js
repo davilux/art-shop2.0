@@ -10,6 +10,7 @@ export const loginUser = createAsyncThunk('loginUser', async ({username, passwor
     })
 
     //TODO: Move tokens to cookies
+    //TODO: replace axios with apiClient from axiosConfig
     if(loginResponse && loginResponse.status === 200) {
       window.localStorage.setItem('accessToken', loginResponse.data.accessToken)
       window.localStorage.setItem('refreshToken', loginResponse.data.refreshToken)
