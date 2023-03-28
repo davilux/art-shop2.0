@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../redux/reducers/usersSlice'
+import { registerUser } from '../redux/reducers/usersSlice'
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -19,9 +19,7 @@ const Register = () => {
     if(!username) return alert('Username required.')
     if(!password) return alert('Please enter a password.')
 
-
-    //TODO: dispatch registerUser
-    //dispatch(loginUser({username, password}))
+    dispatch(registerUser({username, password, firstName, lastName, email}))
   }
 
   return (

@@ -63,14 +63,30 @@ router.post('/login', async (req, res, next) => {
       })
   }
   catch(e){
-    //console.error(e)
     next(e)
   }
-
 })
 
 //LOG OUT
 //Delete refresh and access tokens
+
+router.post('/register', async (req, res, next) => {
+  try{
+    //TODO: Check if username and/or email already exist in the databse, as both of those fields must be unique.
+
+
+    //Instead of passing in the entire request body, we select which properties we want. This prevents a user from making a request where isAdmin is set to true.
+    const {username, password, firstName, lastName, email} = req.body
+
+    const newUser = await User.create({username, password, firstName, lastName, email})
+
+    res.send(newUser).status(200)
+  }
+  catch(e){
+    next(e)
+  }
+})
+
 
 //TODO: Manually expire the access token (instead of waiting for it to time out) so that after a user logs out, there isn't a window where an unregistered user can access the previously logged in user's private data
 router.delete('/logout', async(req,res) => {
