@@ -33,8 +33,6 @@ const Navbar = () => {
           <Link to='/' >Home</Link>
           <Link to='/cart' >Cart</Link>
           { loggedIn && <Link to='/settings' >Settings</Link>}
-
-          {/* TODO: dispatch a log out thunk here */}
           { loggedIn ? <Link onClick={handleSignOut} >Sign Out</Link> : <Link to='/login' >Sign In</Link>}
         </nav>
       <Routes>
