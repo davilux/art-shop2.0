@@ -57,10 +57,17 @@ const hashPassword = async (user) => {
   }
 }
 
+const convertNameToLower = (user) => {
+  user.username = user.username.toLowerCase()
+}
+
 //TODO: Hook: beforeCreate to validate password length. Don't want to do this on sequelize model because passwords are hashed.
 
 User.beforeCreate(hashPassword)
 User.beforeUpdate(hashPassword)
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)))
+
+User.beforeCreate(convertNameToLower)
+User.beforeBulkCreate(convertNameToLower)
 
 module.exports = User
