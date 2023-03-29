@@ -89,12 +89,13 @@ router.post('/register', async (req, res, next) => {
 
 
 //TODO: Manually expire the access token (instead of waiting for it to time out) so that after a user logs out, there isn't a window where an unregistered user can access the previously logged in user's private data
-router.delete('/logout', async(req,res) => {
+router.put('/logout', async(req, res) => {
   try{
+    const {refreshToken} = req.body
       //Find the user with the given refresh token.
       const user = await User.findOne({
         where : {
-          refreshToken : req.body.token
+          refreshToken : refreshToken
         }
       })
       if(!user) res.sendStatus(500)
@@ -102,7 +103,6 @@ router.delete('/logout', async(req,res) => {
       await user.update({
         refreshToken: ""
       })
-
       if(user.refreshToken === '') res.sendStatus(204)
   }
   catch(e){

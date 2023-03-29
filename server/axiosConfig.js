@@ -3,11 +3,12 @@
 import axios from 'axios'
 
 const accessToken = window.localStorage.getItem('accessToken')
+const refreshToken = window.localStorage.getItem('refreshToken')
 
 const client = axios.create({
-  timeout: 1000,
-  headers: {
-    authorization: accessToken
+  tokens : {
+      accessToken,
+      refreshToken
   }
 })
 

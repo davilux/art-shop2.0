@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import AllProducts from './AllProducts';
 import Home from './Home'
@@ -10,10 +10,17 @@ import Login from './Login';
 import NotFound from './NotFound'
 import Register from './Register'
 
+import { logoutUser } from '../redux/reducers/usersSlice';
+
 const Navbar = () => {
 
+  const dispatch = useDispatch()
+
   const loggedInUser = useSelector((state) => state.users.loggedInUser)
-  console.log(loggedInUser)
+
+  const handleSignOut = () => {
+    dispatch(logoutUser())
+  }
 
   return (
     <Router>
@@ -24,7 +31,7 @@ const Navbar = () => {
           { loggedInUser.refreshToken && <Link to='/settings' >Settings</Link>}
 
           {/* TODO: dispatch a log out thunk here */}
-          { loggedInUser.refreshToken ? <Link to='/signout' >Sign Out</Link> : <Link to='/login' >Sign In</Link>}
+          { loggedInUser.refreshToken ? <Link onClick={handleSignOut} >Sign Out</Link> : <Link to='/login' >Sign In</Link>}
         </nav>
       <Routes>
         <Route path="/shop" element={<AllProducts/>} />
