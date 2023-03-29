@@ -21,7 +21,6 @@ const Login = () => {
 
     dispatch(loginUser({username, password}))
 
-    console.log('loggedInUser', loggedInUser)
     //TODO: Navigate to different page once user logs in
     //navigate('/shop')
   }

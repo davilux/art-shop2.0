@@ -46,6 +46,22 @@ export const registerUser = createAsyncThunk('registerUser', async({username, pa
   }
 })
 
+export const logoutUser = createAsyncThunk('logoutUser', async() => {
+  try {
+    const logOutResponse = await axios.put('/api/auth/logout', {
+      refreshToken : window.localStorage.getItem('refreshToken')
+    })
+    if (logOutResponse.status === 204) {
+      window.localStorage.removeItem('accessToken');
+      window.localStorage.removeItem('refreshToken');
+    }
+  }
+  catch(e){
+    console.error(e)
+    return e.message
+  }
+})
+
 //SLICE
 export const usersSlice = createSlice({
   name : "state",
@@ -91,6 +107,18 @@ export const usersSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.status = 'failed'
+        state.error = action.error.message
+      })
+      builder
+      .addCase(logoutUser.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.status = 'succeeded';
+        state.loggedInUser = {}
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.status = 'failed';
         state.error = action.error.message
       })
   }
