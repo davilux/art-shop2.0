@@ -9,26 +9,27 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true,
+    //TODO: Use regex for validation. Only allow certain characters
   },
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isAlpha: true,
-      len: [1, 50],
+      len: [1, 150],
     },
   },
   lastName: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      //TODO: validate for alpha characters and also include ' for names such as O'Riley
-      // isAlpha: true,
-      len: [1, 50],
+      len: [1, 150],
     },
   },
   password: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    validate: {
+      len: [8, 20]
+    },
   },
   email: {
     type: Sequelize.STRING,
@@ -50,7 +51,6 @@ const User = db.define('user', {
 
 // HASHING HOOK
 const hashPassword = async (user) => {
-
   //This check prevents an already hashed password from being re-hashed
   if (user.changed('password')){
     user.password = await bcrypt.hash(user.password, SALT_ROUNDS)
@@ -61,15 +61,12 @@ const convertNameToLower = (user) => {
   user.username = user.username.toLowerCase()
 }
 
-//TODO: Hook: beforeCreate to validate password length. Don't want to do this on sequelize model because passwords are hashed.
-
 User.beforeCreate(hashPassword)
 User.beforeUpdate(hashPassword)
 User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)))
 
 User.beforeCreate(convertNameToLower)
 User.beforeBulkCreate(convertNameToLower)
-
 User.beforeUpdate(convertNameToLower)
 
 module.exports = User
