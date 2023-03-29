@@ -47,6 +47,14 @@ async function seed() {
       email: `admin@artshop.com`,
       username: `admin`,
       isAdmin: true,
+    }),
+    User.create({
+      password: 'sparkleMagic11',
+      firstName: `Aesthetic`,
+      lastName: `Kitten`,
+      email: `aestheticKitten@vaporwavvve.com`,
+      username: `Aesthetic_Kitten`,
+      isAdmin: false,
     })
   ])
 
