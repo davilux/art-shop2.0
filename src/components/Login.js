@@ -19,7 +19,10 @@ const Login = () => {
     if(!username) return alert('Username required.')
     if(!password) return alert('Please enter a password.')
 
-    dispatch(loginUser({username, password}))
+    dispatch(loginUser({
+      username: username.toLowerCase(),
+      password
+    }))
 
     //TODO: Navigate to different page once user logs in
     //navigate('/shop')

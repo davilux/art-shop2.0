@@ -70,4 +70,6 @@ User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)))
 User.beforeCreate(convertNameToLower)
 User.beforeBulkCreate(convertNameToLower)
 
+User.beforeUpdate(convertNameToLower)
+
 module.exports = User
