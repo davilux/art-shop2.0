@@ -55,6 +55,14 @@ async function seed() {
       email: `aestheticKitten@vaporwavvve.com`,
       username: `Aesthetic_Kitten`,
       isAdmin: false,
+    }),
+    User.create({
+      password: 'megspass',
+      firstName: `Meggy`,
+      lastName: `O'Riley`,
+      email: `meggy@somewhere.com`,
+      username: `Meggy_O'Riley`,
+      isAdmin: false,
     })
   ])
 
