@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -13,10 +13,14 @@ import Register from './Register'
 import { logoutUser } from '../redux/reducers/usersSlice';
 
 const Navbar = () => {
-
   const dispatch = useDispatch()
-
   const loggedInUser = useSelector((state) => state.users.loggedInUser)
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  useEffect(()=>{
+    setLoggedIn(!loggedIn)
+  }, [loggedInUser])
+
 
   const handleSignOut = () => {
     dispatch(logoutUser())
@@ -28,10 +32,8 @@ const Navbar = () => {
           <Link to='/shop' >Shop</Link>
           <Link to='/' >Home</Link>
           <Link to='/cart' >Cart</Link>
-          { loggedInUser.refreshToken && <Link to='/settings' >Settings</Link>}
-
-          {/* TODO: dispatch a log out thunk here */}
-          { loggedInUser.refreshToken ? <Link onClick={handleSignOut} >Sign Out</Link> : <Link to='/login' >Sign In</Link>}
+          { loggedIn && <Link to='/settings' >Settings</Link>}
+          { loggedIn ? <Link onClick={handleSignOut} >Sign Out</Link> : <Link to='/login' >Sign In</Link>}
         </nav>
       <Routes>
         <Route path="/shop" element={<AllProducts/>} />
