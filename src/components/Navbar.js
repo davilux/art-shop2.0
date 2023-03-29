@@ -18,9 +18,9 @@ const Navbar = () => {
   const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect(()=>{
-    setLoggedIn(!loggedIn)
+    if(loggedInUser.refreshToken) setLoggedIn(true)
+    else setLoggedIn(false)
   }, [loggedInUser])
-
 
   const handleSignOut = () => {
     dispatch(logoutUser())

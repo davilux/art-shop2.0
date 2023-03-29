@@ -47,12 +47,12 @@ const Login = () => {
           Password:
           <input type={passwordHidden ? 'password' : 'text'} password="password" onChange={(event)=> setPassword(event.target.value)}/>
         </label>
+        <input type="submit" value="Submit"/>
+      </form>
+
 
         {/* TODO: replace the following button with an icon */}
         <button onClick={toggleHiddenPassword}>show/hide password</button>
-
-        <input type="submit" value="Submit"/>
-      </form>
     </>
   )
 }
