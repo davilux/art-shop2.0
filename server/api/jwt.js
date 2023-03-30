@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const bcrypt = require('bcrypt')
 
+// ---------- TOKEN FUNCTIONS ----------
+
 /**
  *  Generates an access token.
  * @param {User object} user
@@ -36,11 +38,13 @@ function refreshAccessToken(refreshToken){
   })
 }
 
+// ---------- MIDDLEWARE ----------
+
 /**
  * Middleware used to authenticate a token.
  * @returns Status code relevant to the success or failure of the verification.
  */
-function authenticateToken(req,res,next){
+const authenticateToken = (req,res,next) => {
   // const authHeader = req.headers['authorization']
   const authHeader = req.headers.authorization
 
@@ -58,6 +62,8 @@ function authenticateToken(req,res,next){
 
 /**
  * Gatekeeing middleware that checks if the user provided in the request is an admin.
+ *
+ * TODO: Make sure this approach is secure. Could a user simply overwrite the 'user.isAdmin' property in the request?
  */
 const isAdmin = (req, res, next) => {
   if (!req.user.isAdmin) {
