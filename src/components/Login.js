@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../redux/reducers/usersSlice'
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,6 @@ const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [passwordHidden, setPasswordHidden] = useState(true)
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -18,13 +17,15 @@ const Login = () => {
     if(!username) return alert('Username required.')
     if(!password) return alert('Please enter a password.')
     if(password.length < 8) return alert('Password must be at least 8 characters.')
+    else {
+      const dispatchRes = await dispatch(loginUser({
+        username: username.toLowerCase(),
+        password
+      }))
 
-    dispatch(loginUser({
-      username: username.toLowerCase(),
-      password
-    }))
-    //TODO: Navigate to different page once user logs in
-    //navigate('/shop')
+      // Check if a user successfully logged in:
+      if(dispatchRes.payload.refreshToken) navigate('/shop')
+    }
   }
 
   const toggleHiddenPassword = (e) => {
@@ -43,7 +44,6 @@ const Login = () => {
           <input type="text" name="username" onChange={(event)=> setUsername(event.target.value)}/>
         </label>
         <label>
-          {/* TODO: implement hide/show password option */}
           Password:
           <input type={passwordHidden ? 'password' : 'text'} password="password" onChange={(event)=> setPassword(event.target.value)}/>
         </label>
@@ -58,3 +58,4 @@ const Login = () => {
 }
 
 export default Login
+
