@@ -13,6 +13,7 @@ import Register from "./Register";
 import { logoutUser } from "../redux/reducers/usersSlice";
 
 import { StyledPageContainer } from "../styles/PageContainer.styles";
+import { StyledNavbar } from "../styles/Navbar.styles";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const Navbar = () => {
 
   return (
     <Router>
-      <nav>
+      <StyledNavbar>
         <Link to="/shop">Shop</Link>
         <Link to="/">Home</Link>
         <Link to="/cart">Cart</Link>
@@ -40,7 +41,7 @@ const Navbar = () => {
         ) : (
           <Link to="/login">Sign In</Link>
         )}
-      </nav>
+      </StyledNavbar>
       <StyledPageContainer>
         <Routes>
           <Route path="/shop" element={<AllProducts />} />
