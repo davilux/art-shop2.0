@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledNavbar = styled.nav`
   margin: 0;
-  font-size: 1.5em;
+  font-size: 1.5rem;
 
   a {
     color: red;
