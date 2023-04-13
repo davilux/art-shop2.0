@@ -14,7 +14,6 @@ const SingleProduct = ({ product }) => {
           ? `${product.quantityInStock} in stock!`
           : "Out of stock"}
       </p>
-      <p>{product.description}</p>
     </>
   );
 };

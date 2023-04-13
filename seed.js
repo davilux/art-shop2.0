@@ -1,6 +1,9 @@
-const faker = require('@faker-js/faker').faker;
-const { db, models: {User, Category, Product, Order, LineItem}} = require('./server/db')
-const LoremIpsum = require('lorem-ipsum').LoremIpsum
+const faker = require("@faker-js/faker").faker;
+const {
+  db,
+  models: { User, Category, Product, Order, LineItem },
+} = require("./server/db");
+const LoremIpsum = require("lorem-ipsum").LoremIpsum;
 
 //using an api to generate descriptions
 const lorem = new LoremIpsum({
@@ -8,7 +11,7 @@ const lorem = new LoremIpsum({
     max: 16,
     min: 4,
   },
-})
+});
 
 /**
  * seed - this function clears the database, updates tables to
@@ -16,32 +19,31 @@ const lorem = new LoremIpsum({
  */
 
 async function seed() {
-  await db.sync({force: true}) // clears db and matches models to tables
-  console.log('db synced!')
+  await db.sync({ force: true }); // clears db and matches models to tables
+  console.log("db synced!");
 
-  const categories = await Promise.all([Category.create({name: 'All'})])
+  const categories = await Promise.all([Category.create({ name: "All" })]);
 
   // Creating Users
 
   let user;
 
-  for(let i = 0; i < 10; i++){
+  for (let i = 0; i < 10; i++) {
     user = {
       password: faker.internet.password(),
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       isAdmin: false,
-    }
-    user.email = `${user.lastName}_${user.firstName}@example.com`
-    user.username = `${user.firstName}_${user.lastName}`
+    };
+    user.email = `${user.lastName}_${user.firstName}@example.com`;
+    user.username = `${user.firstName}_${user.lastName}`;
 
-    await User.create(user)
+    await User.create(user);
   }
-
 
   const users = await Promise.all([
     User.create({
-      password: 'admin_password',
+      password: "admin_password",
       firstName: `Trustworthy`,
       lastName: `Administrator`,
       email: `admin@artshop.com`,
@@ -49,7 +51,7 @@ async function seed() {
       isAdmin: true,
     }),
     User.create({
-      password: 'sparkleMagic11',
+      password: "sparkleMagic11",
       firstName: `Aesthetic`,
       lastName: `Kitten`,
       email: `aestheticKitten@vaporwavvve.com`,
@@ -57,33 +59,88 @@ async function seed() {
       isAdmin: false,
     }),
     User.create({
-      password: 'megspass',
+      password: "megspass",
       firstName: `Meggy`,
       lastName: `O'Riley`,
       email: `meggy@somewhere.com`,
       username: `Meggy_O'Riley`,
       isAdmin: false,
-    })
-  ])
+    }),
+  ]);
 
   //Creating Products
   const products = await Promise.all([
     Product.create({
-      name: 'Belay Me Sticker',
+      name: "Belay Me Sticker",
       description: lorem.generateSentences(10),
       inventoryQty: 2,
-      photoUrl:
-        './img/blackheart.png',
+      photoUrl: "./img/blackheart.png",
       price: 2.99,
-      category: 'stickers',
-    })
-  ])
+      category: "stickers",
+    }),
+    Product.create({
+      name: "Belay Me Sticker2",
+      description: lorem.generateSentences(10),
+      inventoryQty: 2,
+      photoUrl: "./img/blackheart.png",
+      price: 2.99,
+      category: "stickers",
+    }),
+    Product.create({
+      name: "Belay Me Sticker3",
+      description: lorem.generateSentences(10),
+      inventoryQty: 2,
+      photoUrl: "./img/blackheart.png",
+      price: 2.99,
+      category: "stickers",
+    }),
+    Product.create({
+      name: "Belay Me Sticker4",
+      description: lorem.generateSentences(10),
+      inventoryQty: 2,
+      photoUrl: "./img/blackheart.png",
+      price: 2.99,
+      category: "stickers",
+    }),
+    Product.create({
+      name: "Belay Me Sticker5",
+      description: lorem.generateSentences(10),
+      inventoryQty: 2,
+      photoUrl: "./img/blackheart.png",
+      price: 2.99,
+      category: "stickers",
+    }),
+    Product.create({
+      name: "Belay Me Sticker6",
+      description: lorem.generateSentences(10),
+      inventoryQty: 2,
+      photoUrl: "./img/blackheart.png",
+      price: 2.99,
+      category: "stickers",
+    }),
+    Product.create({
+      name: "Belay Me Sticker7",
+      description: lorem.generateSentences(10),
+      inventoryQty: 2,
+      photoUrl: "./img/blackheart.png",
+      price: 2.99,
+      category: "stickers",
+    }),
+    Product.create({
+      name: "Belay Me Sticker8",
+      description: lorem.generateSentences(10),
+      inventoryQty: 2,
+      photoUrl: "./img/blackheart.png",
+      price: 2.99,
+      category: "stickers",
+    }),
+  ]);
 
   const orders = await Promise.all([
     Order.create({
       userId: 1,
     }),
-  ])
+  ]);
 
   // const lineItems = await Promise.all([
   //   LineItem.create({
@@ -100,7 +157,7 @@ async function seed() {
   //   }),
   // ])
 
-  console.log(`seeded successfully`)
+  console.log(`seeded successfully`);
 }
 
 /*
@@ -109,16 +166,16 @@ async function seed() {
  The `seed` function is concerned only with modifying the database.
 */
 async function runSeed() {
-  console.log('seeding...')
+  console.log("seeding...");
   try {
-    await seed()
+    await seed();
   } catch (err) {
-    console.error(err)
-    process.exitCode = 1
+    console.error(err);
+    process.exitCode = 1;
   } finally {
-    console.log('closing db connection')
-    await db.close()
-    console.log('db connection closed')
+    console.log("closing db connection");
+    await db.close();
+    console.log("db connection closed");
   }
 }
 
@@ -128,8 +185,8 @@ async function runSeed() {
   any errors that might occur inside of `seed`.
 */
 if (module === require.main) {
-  runSeed()
+  runSeed();
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+module.exports = seed;

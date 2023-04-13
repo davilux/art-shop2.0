@@ -1,10 +1,11 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const Product = db.define('product', {
+const Product = db.define("product", {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
   },
   description: {
     type: Sequelize.TEXT,
@@ -17,12 +18,12 @@ const Product = db.define('product', {
   quantityInStock: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    defaultValue : 0,
+    defaultValue: 0,
   },
   photoUrl: {
     type: Sequelize.TEXT,
-    defaultValue : 'img/blackheart.png'
+    defaultValue: "img/blackheart.png",
   },
-})
+});
 
-module.exports = Product
+module.exports = Product;
