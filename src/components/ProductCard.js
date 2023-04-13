@@ -8,12 +8,7 @@ const SingleProduct = ({ product }) => {
       <img src={product.photoUrl} alt="default product"></img>
 
       {product.quantityInStock > 0 && <button>Add to Cart</button>}
-      <p>{product.price}</p>
-      <p>
-        {product.quantityInStock
-          ? `${product.quantityInStock} in stock!`
-          : "Out of stock"}
-      </p>
+      <p>{product.quantityInStock ? product.price : "Out of stock"}</p>
     </>
   );
 };
