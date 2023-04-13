@@ -5,6 +5,6 @@ import styled from "styled-components";
  */
 
 export const StyledPageContainer = styled.main`
-  margin: 0;
+  margin: 10px;
   padding: 0;
 `;
