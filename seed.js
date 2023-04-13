@@ -73,7 +73,7 @@ async function seed() {
     Product.create({
       name: "Belay Me Sticker",
       description: lorem.generateSentences(10),
-      inventoryQty: 2,
+      quantityInStock: 2,
       photoUrl: "./img/blackheart.png",
       price: 2.99,
       category: "stickers",
@@ -81,7 +81,7 @@ async function seed() {
     Product.create({
       name: "Belay Me Sticker2",
       description: lorem.generateSentences(10),
-      inventoryQty: 2,
+      quantityInStock: 2,
       photoUrl: "./img/blackheart.png",
       price: 2.99,
       category: "stickers",
@@ -89,7 +89,7 @@ async function seed() {
     Product.create({
       name: "Belay Me Sticker3",
       description: lorem.generateSentences(10),
-      inventoryQty: 2,
+      quantityInStock: 2,
       photoUrl: "./img/blackheart.png",
       price: 2.99,
       category: "stickers",
@@ -97,7 +97,7 @@ async function seed() {
     Product.create({
       name: "Belay Me Sticker4",
       description: lorem.generateSentences(10),
-      inventoryQty: 2,
+      quantityInStock: 2,
       photoUrl: "./img/blackheart.png",
       price: 2.99,
       category: "stickers",
@@ -105,7 +105,7 @@ async function seed() {
     Product.create({
       name: "Belay Me Sticker5",
       description: lorem.generateSentences(10),
-      inventoryQty: 2,
+      quantityInStock: 2,
       photoUrl: "./img/blackheart.png",
       price: 2.99,
       category: "stickers",
@@ -113,7 +113,7 @@ async function seed() {
     Product.create({
       name: "Belay Me Sticker6",
       description: lorem.generateSentences(10),
-      inventoryQty: 2,
+      quantityInStock: 0,
       photoUrl: "./img/blackheart.png",
       price: 2.99,
       category: "stickers",
@@ -121,7 +121,7 @@ async function seed() {
     Product.create({
       name: "Belay Me Sticker7",
       description: lorem.generateSentences(10),
-      inventoryQty: 2,
+      quantityInStock: 0,
       photoUrl: "./img/blackheart.png",
       price: 2.99,
       category: "stickers",
@@ -129,7 +129,7 @@ async function seed() {
     Product.create({
       name: "Belay Me Sticker8",
       description: lorem.generateSentences(10),
-      inventoryQty: 2,
+      quantityInStock: 2,
       photoUrl: "./img/blackheart.png",
       price: 2.99,
       category: "stickers",
