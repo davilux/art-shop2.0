@@ -18,3 +18,7 @@ When cloning to a new device, you will need to:
 - `npm run seed`
 - `npm start`
 - open localhost:3000 in browser to view the site
+
+How to test protected routes:
+
+- Install REST Client for VS Code. Open test.rest and follow the instructions.
