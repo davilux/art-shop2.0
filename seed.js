@@ -1,7 +1,7 @@
 const faker = require("@faker-js/faker").faker;
 const {
   db,
-  models: { User, Category, Product, Order, LineItem },
+  models: { User, Category, Product, Order, CartItem, Cart },
 } = require("./server/db");
 const LoremIpsum = require("lorem-ipsum").LoremIpsum;
 
@@ -25,21 +25,6 @@ async function seed() {
   const categories = await Promise.all([Category.create({ name: "All" })]);
 
   // Creating Users
-
-  let user;
-
-  for (let i = 0; i < 10; i++) {
-    user = {
-      password: faker.internet.password(),
-      firstName: faker.name.firstName(),
-      lastName: faker.name.lastName(),
-      isAdmin: false,
-    };
-    user.email = `${user.lastName}_${user.firstName}@example.com`;
-    user.username = `${user.firstName}_${user.lastName}`;
-
-    await User.create(user);
-  }
 
   const users = await Promise.all([
     User.create({
@@ -67,6 +52,20 @@ async function seed() {
       isAdmin: false,
     }),
   ]);
+
+  let user;
+  for (let i = 0; i < 10; i++) {
+    user = {
+      password: faker.internet.password(),
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      isAdmin: false,
+    };
+    user.email = `${user.lastName}_${user.firstName}@example.com`;
+    user.username = `${user.firstName}_${user.lastName}`;
+
+    await User.create(user);
+  }
 
   //Creating Products
   const products = await Promise.all([
@@ -136,26 +135,50 @@ async function seed() {
     }),
   ]);
 
-  const orders = await Promise.all([
-    Order.create({
+  const carts = await Promise.all([
+    Cart.create({
       userId: 1,
+    }),
+    Cart.create({
+      userId: 2,
+    }),
+    Cart.create({
+      userId: 3,
     }),
   ]);
 
-  // const lineItems = await Promise.all([
-  //   LineItem.create({
-  //     orderId: 1,
-  //     price: 4.99, //what happens if the price is more than 2 decimal places?
-  //     quantity: 1,
-  //     productId: 1,
-  //   }),
-  //   LineItem.create({
-  //     orderId: 1,
-  //     price: 11.99,
-  //     quantity: 2,
-  //     productId: 4,
-  //   }),
-  // ])
+  const cartItems = await Promise.all([
+    CartItem.create({
+      cartId: 1,
+      quantity: 1,
+      productId: 1,
+    }),
+    CartItem.create({
+      cartId: 1,
+      quantity: 2,
+      productId: 4,
+    }),
+    CartItem.create({
+      cartId: 2,
+      quantity: 1,
+      productId: 1,
+    }),
+    CartItem.create({
+      cartId: 2,
+      quantity: 2,
+      productId: 4,
+    }),
+    CartItem.create({
+      cartId: 3,
+      quantity: 1,
+      productId: 1,
+    }),
+    CartItem.create({
+      cartId: 3,
+      quantity: 2,
+      productId: 4,
+    }),
+  ]);
 
   console.log(`seeded successfully`);
 }
