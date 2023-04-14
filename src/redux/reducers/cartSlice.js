@@ -4,7 +4,7 @@ import axios from "axios";
 //THUNKS
 export const getCart = createAsyncThunk("cart/get", async (userId) => {
   try {
-    const { data } = await axios.get(`/api/cart${userId}`);
+    const { data } = await axios.get(`/api/cart/${userId}`);
     return data;
   } catch (e) {
     return e.message;
@@ -15,7 +15,7 @@ export const getCart = createAsyncThunk("cart/get", async (userId) => {
 export const cartSlice = createSlice({
   name: "state",
   initialState: {
-    cart: {},
+    items: {},
     status: "loading",
     error: "",
   },
@@ -27,7 +27,7 @@ export const cartSlice = createSlice({
       })
       .addCase(getCart.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.cart = action.payload;
+        state.items = action.payload;
       })
       .addCase(getCart.rejected, (state, action) => {
         state.status = "failed";
