@@ -15,7 +15,7 @@ export const getCart = createAsyncThunk("cart/get", async (userId) => {
 export const cartSlice = createSlice({
   name: "state",
   initialState: {
-    items: {},
+    items: [],
     status: "loading",
     error: "",
   },
