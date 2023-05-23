@@ -5,24 +5,25 @@ import { getCart } from "../redux/reducers/cartSlice";
 const Cart = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.loggedInUser);
-
+  const status = useSelector((state) => state.users.status);
   useEffect(() => {
-    dispatch(getCart(user.id));
-  }, [dispatch, user]);
+    if (status === "succeeded") {
+      dispatch(getCart(user.id));
+    }
+  }, [status, dispatch]);
 
   const cart = useSelector((state) => state.cart.items);
 
   return (
     <>
       <h1>Cart</h1>
-      {typeof cart === "object" &&
-        cart.map((item) => (
-          <li key={item.product.id}>
-            {item.product.name} Quantity: {item.quantity} Price each:{" "}
-            {item.product.price} Total:{" "}
-            {Number(item.product.price) * item.quantity}
-          </li>
-        ))}
+      {cart.map((item) => (
+        <li>
+          {item.product.name} Quantity: {item.quantity} Price each:{" "}
+          {item.product.price} Total:{" "}
+          {Number(item.product.price) * item.quantity}
+        </li>
+      ))}
     </>
   );
 };
