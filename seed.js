@@ -159,6 +159,11 @@ async function seed() {
       productId: 4,
     }),
     CartItem.create({
+      cartId: 1,
+      quantity: 1,
+      productId: 2,
+    }),
+    CartItem.create({
       cartId: 2,
       quantity: 1,
       productId: 1,
@@ -172,11 +177,6 @@ async function seed() {
       cartId: 3,
       quantity: 1,
       productId: 1,
-    }),
-    CartItem.create({
-      cartId: 3,
-      quantity: 2,
-      productId: 4,
     }),
   ]);
 
