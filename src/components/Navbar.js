@@ -15,6 +15,8 @@ import { logoutUser } from "../redux/reducers/usersSlice";
 import { StyledPageContainer } from "../styles/PageContainer.styles";
 import { StyledNavbar } from "../styles/Navbar.styles";
 
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
 const Navbar = () => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.users.loggedInUser);
@@ -32,15 +34,21 @@ const Navbar = () => {
   return (
     <Router>
       <StyledNavbar>
-        <Link to="/shop">Shop</Link>
-        <Link to="/">Home</Link>
-        <Link to="/cart">Cart</Link>
-        {loggedIn && <Link to="/settings">Settings</Link>}
-        {loggedIn ? (
-          <Link onClick={handleSignOut}>Sign Out</Link>
-        ) : (
-          <Link to="/login">Sign In</Link>
-        )}
+        <div className="leftNav">
+          <Link to="/shop">Shop</Link>
+          <Link to="/">Home</Link>
+          {loggedIn && <Link to="/settings">Settings</Link>}
+          {loggedIn ? (
+            <Link onClick={handleSignOut}>Sign Out</Link>
+          ) : (
+            <Link to="/login">Sign In</Link>
+          )}
+        </div>
+        <div className="rightNav">
+          <Link to="/cart">
+            <ShoppingCartIcon />
+          </Link>
+        </div>
       </StyledNavbar>
       <StyledPageContainer>
         <Routes>

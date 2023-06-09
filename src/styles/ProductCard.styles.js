@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledProductCard = styled.li`
   width: 200px;
-  background-color: purple;
+  background-color: #ebebeb;
   padding: 10px;
   margin: 10px;
 
@@ -19,15 +19,16 @@ export const StyledProductCard = styled.li`
   }
 
   button {
-    background-color: red;
-    border: 3px solid red;
+    background-color: #333333;
+    color: #d6d6d6;
+    border: 0;
     padding: 10px;
     cursor: pointer;
     border-radius: 100px;
   }
   button:hover {
-    background-color: white;
-    border: 3px solid black;
+    background-color: #0a0a0a;
+    border: 0;
     padding: 10px;
     cursor: pointer;
     border-radius: 100px;
@@ -35,6 +36,5 @@ export const StyledProductCard = styled.li`
 
   p {
     margin: 10px 0px;
-    color: red;
   }
 `;
