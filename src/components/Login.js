@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/reducers/usersSlice";
 import { useNavigate } from "react-router-dom";
 
+import { StyledLoginForm } from "../styles/LoginForm.styles";
+
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
@@ -42,7 +44,7 @@ const Login = () => {
   return (
     <>
       <h1>Login</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <StyledLoginForm onSubmit={(e) => handleSubmit(e)}>
         <label>
           Username:
           <input
@@ -63,9 +65,7 @@ const Login = () => {
           </button>
         </label>
         <input type="submit" value="Submit" />
-      </form>
-
-      {/* TODO: replace the following button with an icon */}
+      </StyledLoginForm>
     </>
   );
 };
