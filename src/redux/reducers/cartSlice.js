@@ -16,27 +16,34 @@ export const getCart = createAsyncThunk("cart/get", async (userId) => {
   }
 });
 
+//Clears the cart's state when a user logs out
+export const clearCart = createAsyncThunk("clearCart", async () => {
+  try {
+    return true;
+  } catch (e) {
+    return e.message;
+  }
+});
+
 //SLICE
 export const cartSlice = createSlice({
   name: "state",
   initialState: {
     items: [],
-    status: "loading",
     error: "",
   },
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(getCart.pending, (state) => {
-        state.status = "loading";
-      })
+      .addCase(getCart.pending, (state) => {})
       .addCase(getCart.fulfilled, (state, action) => {
-        state.status = "succeeded";
         state.items = action.payload;
       })
       .addCase(getCart.rejected, (state, action) => {
-        state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(clearCart.fulfilled, (state, action) => {
+        state.items = [];
       });
   },
 });
