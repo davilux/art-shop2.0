@@ -4,7 +4,12 @@ import axios from "axios";
 //THUNKS
 export const getCart = createAsyncThunk("cart/get", async (userId) => {
   try {
-    const { data } = await axios.get(`/api/cart/${userId}`);
+    const token = window.localStorage.getItem("accessToken");
+    const { data } = await axios.get(`/api/cart/${userId}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
     return data;
   } catch (e) {
     return e.message;

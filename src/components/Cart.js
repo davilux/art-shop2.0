@@ -13,12 +13,11 @@ const Cart = () => {
   }, [status, dispatch]);
 
   const cart = useSelector((state) => state.cart.items);
-
   return (
     <>
       <h1>Cart</h1>
       {cart.map((item) => (
-        <li>
+        <li key={item.id}>
           {item.product.name} Quantity: {item.quantity} Price each:{" "}
           {item.product.price} Total:{" "}
           {Number(item.product.price) * item.quantity}
