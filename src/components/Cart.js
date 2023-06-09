@@ -5,12 +5,14 @@ import { getCart } from "../redux/reducers/cartSlice";
 const Cart = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.loggedInUser);
-  const status = useSelector((state) => state.users.status);
+
+  const isLoggedIn = user.id >= 0;
+
   useEffect(() => {
-    if (status === "succeeded") {
+    if (isLoggedIn) {
       dispatch(getCart(user.id));
     }
-  }, [status, dispatch]);
+  }, [isLoggedIn, dispatch]);
 
   const cart = useSelector((state) => state.cart.items);
   return (

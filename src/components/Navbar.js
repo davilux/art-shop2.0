@@ -11,6 +11,7 @@ import NotFound from "./NotFound";
 import Register from "./Register";
 
 import { logoutUser } from "../redux/reducers/usersSlice";
+import { clearCart } from "../redux/reducers/cartSlice";
 
 import { StyledPageContainer } from "../styles/PageContainer.styles";
 import { StyledNavbar } from "../styles/Navbar.styles";
@@ -29,6 +30,7 @@ const Navbar = () => {
 
   const handleSignOut = () => {
     dispatch(logoutUser());
+    dispatch(clearCart());
   };
 
   return (
