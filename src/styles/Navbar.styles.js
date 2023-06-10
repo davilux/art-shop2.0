@@ -38,4 +38,8 @@ export const StyledNavbar = styled.nav`
     display: flex;
     flex-direction: row;
   }
+
+  svg {
+    font-size: 2rem;
+  }
 `;
