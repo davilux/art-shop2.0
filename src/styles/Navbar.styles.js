@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const StyledNavbar = styled.nav`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin: 0;
   padding: 0;
   font-size: 1.5rem;
@@ -18,15 +21,21 @@ export const StyledNavbar = styled.nav`
     font-size: 2rem;
   }
 
-  .leftNav > :not(.logo),
-  .rightNav {
-    display: none;
-  }
-
-  .leftNav > :first-child {
+  .logo {
     color: red;
     margin: 10px;
     padding: 5px;
+  }
+
+  .hiddenLinks {
+    display: none;
+    width: 100%;
+  }
+
+  .leftNav,
+  .rightNav {
+    display: flex;
+    flex-direction: row;
   }
 
   * {
@@ -34,23 +43,17 @@ export const StyledNavbar = styled.nav`
   }
 
   @media screen and (min-width: 641px) {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    .hiddenLinks {
+      display: block;
+    }
 
     a:hover {
       color: #0a0a0a;
       font-weight: 600;
     }
 
-    .leftNav > :not(:first-child) {
-      display: inline;
-    }
-
-    .leftNav,
-    .rightNav {
-      display: flex;
-      flex-direction: row;
+    .menuIcon {
+      display: none;
     }
   }
 `;

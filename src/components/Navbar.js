@@ -34,6 +34,12 @@ const Navbar = () => {
     dispatch(clearCart());
   };
 
+  const toggleMobileMenu = () => {
+    const links = document.querySelector(".hiddenLinks");
+    if (links.style.display === "block") links.style.display = "none";
+    else links.style.display = "block";
+  };
+
   return (
     <Router>
       <StyledNavbar>
@@ -41,17 +47,22 @@ const Navbar = () => {
           <Link to="/" className="logo">
             Home
           </Link>
-          <Link to="/shop">Shop</Link>
-          {loggedIn && <Link to="/settings">Settings</Link>}
-          {loggedIn ? (
-            <Link onClick={handleSignOut}>Sign Out</Link>
-          ) : (
-            <Link to="/login">Sign In</Link>
-          )}
+          <div className="hiddenLinks">
+            <Link to="/shop">Shop</Link>
+            {loggedIn && <Link to="/settings">Settings</Link>}
+            {loggedIn ? (
+              <Link onClick={handleSignOut}>Sign Out</Link>
+            ) : (
+              <Link to="/login">Sign In</Link>
+            )}
+          </div>
         </div>
         <div className="rightNav">
           <Link to="/cart">
             <ShoppingCartIcon />
+          </Link>
+          <Link className="menuIcon" onClick={toggleMobileMenu}>
+            <MenuIcon />
           </Link>
         </div>
       </StyledNavbar>
