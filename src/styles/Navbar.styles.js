@@ -1,45 +1,56 @@
 import styled from "styled-components";
 
 export const StyledNavbar = styled.nav`
-  /* CUSTOM COLORS */
-  --eerie-black: #172121ff;
-  --magnolia: #f6f2ffff;
-  --dark-cyan: #32908fff;
-  --pomp-and-power: #8d5a97ff;
-  --rich-black: #121420ff;
-
   margin: 0;
   padding: 0;
   font-size: 1.5rem;
   font-weight: 500;
 
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
   a {
-    color: var(--eerie-black);
+    color: #333333;
     text-decoration: none;
     margin: 10px;
     padding: 5px;
     text-transform: uppercase;
   }
 
-  a:hover {
-    color: var(--dark-cyan);
-  }
-
-  .leftNav {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .rightNav {
-    display: flex;
-    flex-direction: row;
-  }
-
   svg {
     font-size: 2rem;
+  }
+
+  .leftNav > :not(.logo),
+  .rightNav {
+    display: none;
+  }
+
+  .leftNav > :first-child {
+    color: red;
+    margin: 10px;
+    padding: 5px;
+  }
+
+  * {
+    border: 1px solid black;
+  }
+
+  @media screen and (min-width: 641px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    a:hover {
+      color: #0a0a0a;
+      font-weight: 600;
+    }
+
+    .leftNav > :not(:first-child) {
+      display: inline;
+    }
+
+    .leftNav,
+    .rightNav {
+      display: flex;
+      flex-direction: row;
+    }
   }
 `;

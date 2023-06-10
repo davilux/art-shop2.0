@@ -17,6 +17,7 @@ import { StyledPageContainer } from "../styles/PageContainer.styles";
 import { StyledNavbar } from "../styles/Navbar.styles";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -37,8 +38,10 @@ const Navbar = () => {
     <Router>
       <StyledNavbar>
         <div className="leftNav">
+          <Link to="/" className="logo">
+            Home
+          </Link>
           <Link to="/shop">Shop</Link>
-          <Link to="/">Home</Link>
           {loggedIn && <Link to="/settings">Settings</Link>}
           {loggedIn ? (
             <Link onClick={handleSignOut}>Sign Out</Link>
