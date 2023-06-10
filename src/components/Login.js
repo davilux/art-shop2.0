@@ -46,7 +46,8 @@ const Login = () => {
       <h1>Login</h1>
       <StyledLoginForm onSubmit={(e) => handleSubmit(e)}>
         <label>
-          Username:
+          Username
+          <br />
           <input
             type="text"
             name="username"
@@ -54,17 +55,20 @@ const Login = () => {
           />
         </label>
         <label>
-          Password:
-          <input
-            type={passwordHidden ? "password" : "text"}
-            password="password"
-            onChange={(event) => setPassword(event.target.value)}
-          />
-          <button onClick={toggleHiddenPassword}>
-            {passwordHidden ? <VisibilityIcon /> : <VisibilityOffIcon />}
-          </button>
+          Password
+          <br />
+          <div className="passwordContainer">
+            <input
+              type={passwordHidden ? "password" : "text"}
+              password="password"
+              onChange={(event) => setPassword(event.target.value)}
+            />
+            <button onClick={toggleHiddenPassword}>
+              {passwordHidden ? <VisibilityIcon /> : <VisibilityOffIcon />}
+            </button>
+          </div>
         </label>
-        <input type="submit" value="Submit" />
+        <input className="submitButton" type="submit" value="Submit" />
       </StyledLoginForm>
     </>
   );
