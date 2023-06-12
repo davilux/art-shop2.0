@@ -36,35 +36,35 @@ const Navbar = () => {
 
   const toggleMobileMenu = () => {
     const links = document.querySelector(".hiddenLinks");
-    if (links.style.display === "block") links.style.display = "none";
-    else links.style.display = "block";
+    if (links.style.display === "flex") links.style.display = "none";
+    else links.style.display = "flex";
   };
+
+  //TODO: When user is on mobile, clicks hamburger to open and then close menu and then switches to desktop sized screen, the links do not appear. Listen for changes in window size?
 
   return (
     <Router>
       <StyledNavbar>
-        <div className="leftNav">
+        <div className="menuBar">
           <Link to="/" className="logo">
             Home
           </Link>
-          <div className="hiddenLinks">
-            <Link to="/shop">Shop</Link>
-            {loggedIn && <Link to="/settings">Settings</Link>}
-            {loggedIn ? (
-              <Link onClick={handleSignOut}>Sign Out</Link>
-            ) : (
-              <Link to="/login">Sign In</Link>
-            )}
-          </div>
-        </div>
-        <div className="rightNav">
-          <Link to="/cart">
-            <ShoppingCartIcon />
-          </Link>
-          <Link className="menuIcon" onClick={toggleMobileMenu}>
+          <Link className="mobileMenuIcon" onClick={toggleMobileMenu}>
             <MenuIcon />
           </Link>
         </div>
+        <ul className="hiddenLinks">
+          <Link to="/shop">Shop</Link>
+          {loggedIn && <Link to="/settings">Settings</Link>}
+          {loggedIn ? (
+            <Link onClick={handleSignOut}>Sign Out</Link>
+          ) : (
+            <Link to="/login">Sign In</Link>
+          )}
+          <Link to="/cart">
+            <ShoppingCartIcon />
+          </Link>
+        </ul>
       </StyledNavbar>
       <StyledPageContainer>
         <Routes>

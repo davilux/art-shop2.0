@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledNavbar = styled.nav`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   margin: 0;
   padding: 0;
@@ -27,15 +27,17 @@ export const StyledNavbar = styled.nav`
     padding: 5px;
   }
 
-  .hiddenLinks {
-    display: none;
-    width: 100%;
-  }
-
-  .leftNav,
-  .rightNav {
+  .menuBar {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .hiddenLinks {
+    display: none;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
   }
 
   * {
@@ -52,7 +54,7 @@ export const StyledNavbar = styled.nav`
       font-weight: 600;
     }
 
-    .menuIcon {
+    .mobileMenuIcon {
       display: none;
     }
   }
