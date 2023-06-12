@@ -42,6 +42,8 @@ const Navbar = () => {
 
   //TODO: When user is on mobile, clicks hamburger to open and then close menu and then switches to desktop sized screen, the links do not appear. Listen for changes in window size?
 
+  //TODO: Close mobile menu when user clicks a link
+
   return (
     <Router>
       <StyledNavbar>
