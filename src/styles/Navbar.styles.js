@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const StyledNavbar = styled.nav`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   margin: 0;
   padding: 0;
   font-size: 1.5rem;
@@ -24,8 +23,7 @@ export const StyledNavbar = styled.nav`
 
   .logo {
     color: red;
-    margin: 10px;
-    padding: 5px;
+    padding: 15px;
   }
 
   .menuBar {
@@ -56,8 +54,25 @@ export const StyledNavbar = styled.nav`
   }
 
   @media screen and (min-width: 641px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .menuBar {
+      position: static;
+      width: auto;
+    }
+
     .hiddenLinks {
-      display: block;
+      display: flex;
+      flex-direction: row;
+      position: static;
+      width: auto;
+      margin: 0;
+    }
+
+    .hiddenLinks > a:nth-child(odd) {
+      background-color: #ffffff;
     }
 
     a:hover {
