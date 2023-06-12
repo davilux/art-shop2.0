@@ -32,6 +32,7 @@ const Navbar = () => {
   const handleSignOut = () => {
     dispatch(logoutUser());
     dispatch(clearCart());
+    closeMobileMenu();
   };
 
   const toggleMobileMenu = () => {
@@ -40,9 +41,13 @@ const Navbar = () => {
     else links.style.display = "flex";
   };
 
-  //TODO: When user is on mobile, clicks hamburger to open and then close menu and then switches to desktop sized screen, the links do not appear. Listen for changes in window size?
+  const closeMobileMenu = () => {
+    if (window.innerWidth >= 641) return;
+    const links = document.querySelector(".hiddenLinks");
+    links.style.display = "none";
+  };
 
-  //TODO: Close mobile menu when user clicks a link
+  //TODO: When user is on mobile, clicks hamburger to open and then close menu and then switches to desktop sized screen, the links do not appear. Listen for changes in window size?
 
   return (
     <Router>
@@ -56,14 +61,22 @@ const Navbar = () => {
           </Link>
         </div>
         <ul className="hiddenLinks">
-          <Link to="/shop">Shop</Link>
-          {loggedIn && <Link to="/settings">Settings</Link>}
+          <Link to="/shop" onClick={closeMobileMenu}>
+            Shop
+          </Link>
+          {loggedIn && (
+            <Link to="/settings" onClick={closeMobileMenu}>
+              Settings
+            </Link>
+          )}
           {loggedIn ? (
             <Link onClick={handleSignOut}>Sign Out</Link>
           ) : (
-            <Link to="/login">Sign In</Link>
+            <Link to="/login" onClick={closeMobileMenu}>
+              Sign In
+            </Link>
           )}
-          <Link to="/cart">
+          <Link to="/cart" onClick={closeMobileMenu}>
             <ShoppingCartIcon />
           </Link>
         </ul>
