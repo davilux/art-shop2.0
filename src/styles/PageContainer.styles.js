@@ -6,7 +6,5 @@ import styled from "styled-components";
 
 export const StyledPageContainer = styled.main`
   margin: 10px;
-  margin-top: 60px;
-  // margin-top should match the height of the menu bar
   padding: 0;
 `;
