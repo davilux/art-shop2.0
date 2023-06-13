@@ -17,40 +17,78 @@ import { StyledPageContainer } from "../styles/PageContainer.styles";
 import { StyledNavbar } from "../styles/Navbar.styles";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.users.loggedInUser);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+  const [showLinks, setShowLinks] = useState(false);
 
   useEffect(() => {
-    if (loggedInUser.refreshToken) setLoggedIn(true);
-    else setLoggedIn(false);
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    setLoggedIn(!!loggedInUser.refreshToken);
   }, [loggedInUser]);
 
   const handleSignOut = () => {
     dispatch(logoutUser());
     dispatch(clearCart());
+    closeMobileMenu();
+  };
+
+  const toggleMobileMenu = () => {
+    setShowLinks((prevShowLinks) => !prevShowLinks);
+  };
+
+  const closeMobileMenu = () => {
+    if (window.innerWidth < 641) {
+      setShowLinks(false);
+    }
   };
 
   return (
     <Router>
       <StyledNavbar>
-        <div className="leftNav">
-          <Link to="/shop">Shop</Link>
-          <Link to="/">Home</Link>
-          {loggedIn && <Link to="/settings">Settings</Link>}
+        <div className="menuBar">
+          <Link to="/" className="logo">
+            Home
+          </Link>
+          <Link className="mobileMenuIcon" onClick={toggleMobileMenu}>
+            <MenuIcon />
+          </Link>
+        </div>
+        <ul className={showLinks ? "show hiddenLinks" : "hiddenLinks"}>
+          <Link to="/shop" onClick={closeMobileMenu}>
+            Shop
+          </Link>
+          {loggedIn && (
+            <Link to="/settings" onClick={closeMobileMenu}>
+              Settings
+            </Link>
+          )}
           {loggedIn ? (
             <Link onClick={handleSignOut}>Sign Out</Link>
           ) : (
-            <Link to="/login">Sign In</Link>
+            <Link to="/login" onClick={closeMobileMenu}>
+              Sign In
+            </Link>
           )}
-        </div>
-        <div className="rightNav">
-          <Link to="/cart">
+          <Link to="/cart" onClick={closeMobileMenu}>
             <ShoppingCartIcon />
           </Link>
-        </div>
+        </ul>
       </StyledNavbar>
       <StyledPageContainer>
         <Routes>
