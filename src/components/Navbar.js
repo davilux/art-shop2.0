@@ -24,6 +24,7 @@ const Navbar = () => {
   const loggedInUser = useSelector((state) => state.users.loggedInUser);
   const [loggedIn, setLoggedIn] = useState(false);
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+  const [showLinks, setShowLinks] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -48,14 +49,13 @@ const Navbar = () => {
   };
 
   const toggleMobileMenu = () => {
-    const links = document.querySelector(".hiddenLinks");
-    links.classList.toggle("show");
+    setShowLinks((prevShowLinks) => !prevShowLinks);
   };
 
   const closeMobileMenu = () => {
-    if (viewportWidth >= 641) return;
-    const links = document.querySelector(".hiddenLinks");
-    links.classList.remove("show");
+    if (window.innerWidth < 641) {
+      setShowLinks(false);
+    }
   };
 
   return (
@@ -69,7 +69,7 @@ const Navbar = () => {
             <MenuIcon />
           </Link>
         </div>
-        <ul className="hiddenLinks">
+        <ul className={showLinks ? "show hiddenLinks" : "hiddenLinks"}>
           <Link to="/shop" onClick={closeMobileMenu}>
             Shop
           </Link>
