@@ -23,10 +23,22 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.users.loggedInUser);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    if (loggedInUser.refreshToken) setLoggedIn(true);
-    else setLoggedIn(false);
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    setLoggedIn(!!loggedInUser.refreshToken);
   }, [loggedInUser]);
 
   const handleSignOut = () => {
@@ -37,17 +49,14 @@ const Navbar = () => {
 
   const toggleMobileMenu = () => {
     const links = document.querySelector(".hiddenLinks");
-    if (links.style.display === "flex") links.style.display = "none";
-    else links.style.display = "flex";
+    links.classList.toggle("show");
   };
 
   const closeMobileMenu = () => {
-    if (window.innerWidth >= 641) return;
+    if (viewportWidth >= 641) return;
     const links = document.querySelector(".hiddenLinks");
-    links.style.display = "none";
+    links.classList.remove("show");
   };
-
-  //TODO: When user is on mobile, clicks hamburger to open and then close menu and then switches to desktop sized screen, the links do not appear. Listen for changes in window size?
 
   return (
     <Router>

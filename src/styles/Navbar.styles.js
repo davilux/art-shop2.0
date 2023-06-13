@@ -45,6 +45,10 @@ export const StyledNavbar = styled.nav`
     position: fixed;
   }
 
+  .hiddenLinks.show {
+    display: flex;
+  }
+
   .hiddenLinks > a:nth-child(odd) {
     background-color: #e0e0e0;
   }
@@ -69,6 +73,10 @@ export const StyledNavbar = styled.nav`
       position: static;
       width: auto;
       margin: 0;
+    }
+
+    .hiddenLinks.show {
+      display: flex;
     }
 
     .hiddenLinks > a:nth-child(odd) {
