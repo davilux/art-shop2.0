@@ -8,6 +8,7 @@ export const StyledNavbar = styled.nav`
   font-size: 1.5rem;
   font-weight: 500;
   background-color: white;
+  height: 68px;
 
   a {
     color: #333333;
@@ -31,6 +32,8 @@ export const StyledNavbar = styled.nav`
     flex-direction: row;
     justify-content: space-between;
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
   }
 
@@ -40,6 +43,7 @@ export const StyledNavbar = styled.nav`
     margin: 0;
     margin-top: 60px;
     // margin-top should match the height of the menu bar
+    left: 0;
     padding: 0;
     width: 100%;
     position: fixed;
