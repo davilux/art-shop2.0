@@ -93,7 +93,7 @@ const Navbar = () => {
       <StyledPageContainer>
         <Routes>
           <Route path="/shop" element={<AllProducts />} />
-          <Route path="/product" element={<SingleProduct />} />
+          <Route path="/products/:id" element={<SingleProduct />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

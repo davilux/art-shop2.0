@@ -1,11 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const SingleProduct = ({ product }) => {
+const ProductCard = ({ product }) => {
   return (
     <>
       <h1>{product.name}</h1>
-
-      <img src={product.photoUrl} alt="default product"></img>
+      <Link to={`/products/${product.id}`}>
+        <img src={product.photoUrl} alt="default product"></img>
+      </Link>
 
       {product.quantityInStock > 0 && <button>Add to Cart</button>}
       <p>{product.quantityInStock ? product.price : "Out of stock"}</p>
@@ -13,4 +15,4 @@ const SingleProduct = ({ product }) => {
   );
 };
 
-export default SingleProduct;
+export default ProductCard;
